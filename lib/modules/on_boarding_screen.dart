@@ -1,4 +1,4 @@
-import 'package:ahramcanadianuni/modules/HomeScreen.dart';
+import 'package:ahramcanadianuni/modules/login_screen.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +25,7 @@ class OnBoardingScreen extends StatelessWidget {
           fit: BoxFit.scaleDown,
         ),
       ),
-      nextScreen: const HomeScreen(),
+      nextScreen: const LoginScreen(),
       splashTransition: SplashTransition.fadeTransition,
       backgroundColor: Colors.white,
     );

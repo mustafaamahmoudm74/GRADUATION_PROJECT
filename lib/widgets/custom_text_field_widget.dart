@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
 class NumericalRangeFormatter extends TextInputFormatter {
   final double min;
   final double max;
@@ -10,9 +9,9 @@ class NumericalRangeFormatter extends TextInputFormatter {
 
   @override
   TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue,
-      TextEditingValue newValue,
-      ) {
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
     if (newValue.text == '') {
       return newValue;
     } else if ((double.tryParse(newValue.text) ?? 0) < min) {
@@ -26,9 +25,13 @@ class NumericalRangeFormatter extends TextInputFormatter {
 class CustomTextFieldWidget extends StatelessWidget {
   static int get _companyDecimalNumber => 3;
 
-  static List<TextInputFormatter> get integerNumberFormatter => [FilteringTextInputFormatter.digitsOnly];
+  static List<TextInputFormatter> get integerNumberFormatter =>
+      [FilteringTextInputFormatter.digitsOnly];
 
-  static List<TextInputFormatter> get decimalNumberFormatter => [FilteringTextInputFormatter.allow(RegExp('^\\d+\\.?\\d{0,$_companyDecimalNumber}'))];
+  static List<TextInputFormatter> get decimalNumberFormatter => [
+        FilteringTextInputFormatter.allow(
+            RegExp('^\\d+\\.?\\d{0,$_companyDecimalNumber}'))
+      ];
 
   final TextEditingController? controller;
   final bool? obscure;
@@ -54,7 +57,11 @@ class CustomTextFieldWidget extends StatelessWidget {
   final List<TextInputFormatter>? formatter;
   final TextInputAction? textInputAction;
   final bool? expands;
-  final bool enable, isClickable, autoFocus, cancelDisableBackground, disableLabel;
+  final bool enable,
+      isClickable,
+      autoFocus,
+      cancelDisableBackground,
+      disableLabel;
   final TextDirection? textDirection;
   final TextAlign? textAlign;
 
@@ -104,7 +111,7 @@ class CustomTextFieldWidget extends StatelessWidget {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(radius ?? 16),
       borderSide: BorderSide(
-        color: color ??Colors.white,
+        color: color ?? Colors.white,
       ),
     );
   }
@@ -121,7 +128,8 @@ class CustomTextFieldWidget extends StatelessWidget {
         textAlign: textAlign ?? TextAlign.start,
         autofocus: autoFocus,
         mouseCursor: isClickable ? SystemMouseCursors.click : null,
-        textInputAction: textInputAction ?? (onSave != null ? null : TextInputAction.next),
+        textInputAction:
+            textInputAction ?? (onSave != null ? null : TextInputAction.next),
         onFieldSubmitted: onSave,
         focusNode: focusNode,
         readOnly: readOnly ?? false,
@@ -135,11 +143,16 @@ class CustomTextFieldWidget extends StatelessWidget {
         decoration: InputDecoration(
           errorStyle: const TextStyle(height: 0, fontSize: 0),
           labelText: disableLabel ? null : label ?? hint,
-          labelStyle: const TextStyle(fontSize: 14,color: Colors.grey),
-          enabledBorder: getBorder(context, radius: borderRadiusValue, color: borderColor),
-          disabledBorder: getBorder(context, radius: borderRadiusValue, color: borderColor),
-          focusedBorder: getBorder(context, radius: borderRadiusValue, color: Colors.black12),
-          border: getBorder(context, radius: borderRadiusValue, color: Colors.black12),
+          labelStyle: const TextStyle(fontSize: 14, color: Colors.grey),
+
+          enabledBorder:
+              getBorder(context, radius: borderRadiusValue, color: borderColor),
+          disabledBorder:
+              getBorder(context, radius: borderRadiusValue, color: borderColor),
+          focusedBorder: getBorder(context,
+              radius: borderRadiusValue, color: Colors.black12),
+          border: getBorder(context,
+              radius: borderRadiusValue, color: Colors.black12),
           isDense: isDense ?? false,
           prefixIconConstraints: BoxConstraints(
             minWidth: prefixIcon == null ? 0 : 35,
@@ -162,28 +175,28 @@ class CustomTextFieldWidget extends StatelessWidget {
           //     : cancelDisableBackground
           //     ? (backGroundColor ?? ThemeClass.of(context).background)
           //     : ThemeClass.of(context).dark.withOpacity(0.3),
-          filled: true,
+          // filled: true,
           hintText: (label == null && !disableLabel) ? null : hint,
           prefixIcon: prefixIcon ?? SizedBox(width: borderRadiusValue ?? 24),
           suffixIcon: suffixIcon == null
               ? SizedBox(width: borderRadiusValue ?? 24)
               : SizedBox(
-            width: 30,
-            child: InkWell(
-              onTap: onSuffixTap,
-              borderRadius: BorderRadius.circular(height ?? 48),
-              hoverColor: Colors.transparent,
-              child: suffixIcon,
-            ),
-          ),
-          hintStyle: hintStyle ,
+                  width: 30,
+                  child: InkWell(
+                    onTap: onSuffixTap,
+                    borderRadius: BorderRadius.circular(height ?? 48),
+                    hoverColor: Colors.transparent,
+                    child: suffixIcon,
+                  ),
+                ),
+          hintStyle: hintStyle,
         ),
         onChanged: onChange,
         textCapitalization: TextCapitalization.words,
         maxLines: maxLine ?? 1,
         minLines: minLines ?? 1,
         keyboardType: textInputType,
-        style: style?.copyWith(height: 1) ,
+        style: style?.copyWith(height: 1),
       ),
     );
   }
