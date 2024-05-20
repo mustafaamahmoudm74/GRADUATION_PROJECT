@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
         children: [
           Container(
             width: 200,
-            height: 200,
+            height: 450,
             color: Colors.blue,
           )
         ],
