@@ -20,9 +20,9 @@ class LoginScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     const Text(
-                      "LogIn",
+                      "Log In",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black54,
                         fontSize: 32,
                       ),
                     ),
@@ -58,7 +58,7 @@ class LoginScreen extends StatelessWidget {
                       height: 48,
                       backGroundColor: Colors.transparent,
                       borderColor: Colors.black,
-                      label: "Your Email",
+                      label: "Your ID",
                     ),
                     const SizedBox(
                       height: 24,
