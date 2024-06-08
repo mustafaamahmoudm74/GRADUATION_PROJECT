@@ -1,10 +1,10 @@
 import 'package:ahramcanadianuni/modules/course_screen.dart';
-
-import '../widgets/custom_text_field_widget.dart';
+import 'package:ahramcanadianuni/modules/login_screen.dart';
+import 'package:ahramcanadianuni/widgets/custom_text_field_widget.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatelessWidget {
+  const SignupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class LoginScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     const Text(
-                      "Log In",
+                      "Sign Up",
                       style: TextStyle(
                         color: Colors.black54,
                         fontSize: 32,
@@ -58,7 +58,37 @@ class LoginScreen extends StatelessWidget {
                       height: 48,
                       backGroundColor: Colors.transparent,
                       borderColor: Colors.black,
-                      label: "Your ID",
+                      label: "First Name",
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    const CustomTextFieldWidget(
+                      width: 328,
+                      height: 48,
+                      backGroundColor: Colors.transparent,
+                      borderColor: Colors.black,
+                      label: "Last Name",
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    const CustomTextFieldWidget(
+                      width: 328,
+                      height: 48,
+                      backGroundColor: Colors.transparent,
+                      borderColor: Colors.black,
+                      label: "Email",
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    const CustomTextFieldWidget(
+                      width: 328,
+                      height: 48,
+                      backGroundColor: Colors.transparent,
+                      borderColor: Colors.black,
+                      label: "ID",
                     ),
                     const SizedBox(
                       height: 24,
@@ -74,19 +104,16 @@ class LoginScreen extends StatelessWidget {
                     const SizedBox(
                       height: 24,
                     ),
-                    Row(
-                      children: [
-                        const Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 48),
-                          child: InkWell(
-                            onTap: () {},
-                            child: const Text(
-                              "Forgot Password ?",
-                            ),
-                          ),
-                        ),
-                      ],
+                    const CustomTextFieldWidget(
+                      width: 328,
+                      height: 48,
+                      backGroundColor: Colors.transparent,
+                      borderColor: Colors.black,
+                      label: "Confirm Password",
+                      obscure: true,
+                    ),
+                    const SizedBox(
+                      height: 24,
                     ),
                     const SizedBox(
                       height: 24,
@@ -98,7 +125,7 @@ class LoginScreen extends StatelessWidget {
                         onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const CourseScreen(),
+                            builder: (context) => const LoginScreen(),
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
@@ -108,7 +135,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         child: const Text(
-                          "LogIn",
+                          "Sign Up",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
