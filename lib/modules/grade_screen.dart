@@ -1,8 +1,10 @@
+import 'package:ahramcanadianuni/modules/course_screen.dart';
+import 'package:ahramcanadianuni/modules/profile_screen.dart';
 import 'package:ahramcanadianuni/modules/recommendation_screen.dart';
+import 'package:ahramcanadianuni/widgets/main_card_widget.dart';
 import 'package:flutter/material.dart';
-import '../widgets/main_card_widget.dart';
-import 'grade_screen.dart';
-import 'profile_screen.dart';
+
+import 'login_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,36 +14,75 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: CoursesScreen(),
+      home: GradeScreen(),
     );
   }
 }
 
-class CoursesScreen extends StatelessWidget {
-  final List<Map<String, String>> courses = [
+class GradeScreen extends StatelessWidget {
+  final List<Map<String, String>> grades = [
     {
-      'title': 'Fundamentals of programming 1',
+      'title': 'Introdution to Cs',
+    },
+    {
+      'title': 'Fundamentals of programming |',
+    },
+    {
+      'title': 'Fundamentals of programming ||',
+    },
+    {
+      'title': 'Data Structures',
+    },
+    {
+      'title': 'Algorithms',
+    },
+    {
+      'title': 'Calculus ||',
+    },
+    {
+      'title': 'Probability',
+    },
+    {
+      'title': 'Data Science',
+    },
+    {
+      'title': 'Introduction to AI',
+    },
+    {
+      'title': 'Computer Organization',
+    },
+    {
+      'title': 'Discrete Mathematics ',
+    },
+    {
+      'title': 'Computer Graphics',
+    },
+    {
+      'title': 'Logic Design',
+    },
+    {
+      'title': 'Data Communications',
+    },
+    {
+      'title': 'Network |',
+    },
+    {
+      'title': 'Security',
+    },
+    {
+      'title': 'Software & System Tools',
+    },
+    {
+      'title': 'Management',
     },
     {
       'title': 'Information System',
     },
     {
-      'title': 'Operating System',
+      'title': 'DataBase |',
     },
     {
-      'title': 'DataBase 1',
-    },
-    {
-      'title': 'Network 1',
-    },
-    {
-      'title': 'Network Security',
-    },
-    {
-      'title': ' Introduction to Cs',
-    },
-    {
-      'title': 'Data Science',
+      'title': 'Software Engineering |',
     },
   ];
 
@@ -60,7 +101,7 @@ class CoursesScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      'Course',
+                      'Course Grade',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 32,
@@ -90,17 +131,17 @@ class CoursesScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    const Center(),
-                    const SizedBox(height: 16),
                     ListView.separated(
-                      separatorBuilder: (ctx, i) => const SizedBox(height: 10),
+                      separatorBuilder: (x, index) =>
+                          const SizedBox(height: 10),
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: courses.length,
+                      itemCount: grades.length,
                       itemBuilder: (context, index) {
-                        final course = courses[index];
+                        final course = grades[index];
                         return MainCardWidget(
-                          title: course["title"] ?? "",
+                          title: (course['title'] ?? ""),
+                          isGradesScreen: true,
                         );
                       },
                     ),
@@ -112,7 +153,7 @@ class CoursesScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
+        currentIndex: 1,
         selectedItemColor: Colors.lightBlue,
         unselectedItemColor: Colors.grey,
         items: const [

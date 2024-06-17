@@ -1,4 +1,7 @@
+import 'dart:ui';
 import 'package:ahramcanadianuni/modules/course_screen.dart';
+import 'package:ahramcanadianuni/modules/signup_screen.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../widgets/custom_text_field_widget.dart';
 import 'package:flutter/material.dart';
@@ -98,7 +101,7 @@ class LoginScreen extends StatelessWidget {
                         onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const CourseScreen(),
+                            builder: (context) => CoursesScreen(),
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
@@ -114,6 +117,22 @@ class LoginScreen extends StatelessWidget {
                             fontSize: 16,
                           ),
                         ),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignupScreen(),
+                        ),
+                      ),
+                      child: const Text(
+                        "Don't you have an account?",
+                        style: TextStyle(
+                            fontSize: 16,
+                            decoration: TextDecoration.underline,
+                            decorationColor: Colors.black54,
+                            decorationThickness: 2),
                       ),
                     )
                   ],
