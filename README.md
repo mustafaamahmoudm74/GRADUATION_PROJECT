@@ -1,2 +1,2 @@
 # GRADUATION_PROJECT
-GRADUATION_PROJECT
+The aim of this graduation project is to develop a recommendation system that assists students in selecting the best major based on their academic performance. The system enables students to track their performance throughout all semesters, view their profiles, grades, registered courses, and schedules. Additionally, it allows students to edit their registration data, including password changes. The system also provides a platform for administrators to calculate student GPAs, create courses, and organize schedules. Teachers can assign grades, make announcements, and upload course materials.
