@@ -1,6 +1,6 @@
-import 'modules/on_boarding_screen.dart';
-
 import 'package:flutter/material.dart';
+
+import 'modules/on_boarding_screen.dart';
 
 void main() {
   runApp(const MyApp());

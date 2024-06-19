@@ -1,7 +1,7 @@
-import 'package:ahramcanadianuni/modules/login_screen.dart';
-import 'package:ahramcanadianuni/modules/signup_screen.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'login_screen.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});

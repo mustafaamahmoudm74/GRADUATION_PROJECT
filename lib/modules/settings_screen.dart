@@ -1,59 +1,57 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SettingsScreen(),
-    );
-  }
-}
-
 class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({super.key});
+
   @override
-  _SettingsScreenState createState() => _SettingsScreenState();
+  State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool _privacy = false;
   bool _notifications = false;
-  bool _language = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Settings'),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            _buildSwitchListTile('Privacy', _privacy, (value) {
-              setState(() {
-                _privacy = value;
-              });
-            }),
+            const SizedBox(
+              height: 42,
+            ),
+            const Text(
+              "Setting and Privacy",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+            ),
+            const SizedBox(
+              height: 52,
+            ),
             _buildSwitchListTile('Notifications', _notifications, (value) {
               setState(() {
                 _notifications = value;
               });
             }),
-            _buildSwitchListTile('Language', _language, (value) {
-              setState(() {
-                _language = value;
-              });
-            }),
-            Spacer(),
-            ElevatedButton(
-              onPressed: () {
-                // Handle save action
-              },
-              child: Text('Save'),
+            const Spacer(),
+            SizedBox(
+              width: 328,
+              height: 48,
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                child: const Text(
+                  "Save",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                ),
+              ),
             ),
           ],
         ),

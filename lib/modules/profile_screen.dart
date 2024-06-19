@@ -1,38 +1,27 @@
-import 'package:ahramcanadianuni/modules/course_screen.dart';
-import 'package:ahramcanadianuni/modules/grade_screen.dart';
-import 'package:ahramcanadianuni/modules/login_screen.dart';
-import 'package:ahramcanadianuni/modules/recommendation_screen.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: ProfileScreen(),
-    );
-  }
-}
+import '../widgets/main_layout_widget.dart';
+import 'edit_account_screen.dart';
+import 'help_screen.dart';
+import 'settings_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(24.0),
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 42),
+            const Text("Profile",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
+            const SizedBox(
+              height: 24,
+            ),
             Center(
               child: Stack(
                 alignment: Alignment.center,
@@ -40,66 +29,57 @@ class ProfileScreen extends StatelessWidget {
                   CircleAvatar(
                     radius: 60,
                     backgroundColor: Colors.grey[300],
-                    backgroundImage: const AssetImage(
-                        'assets/images/ImageHandler.png'), // تأكد من وجود الصورة في المسار الصحيح
+                    backgroundImage:
+                        const AssetImage('assets/images/ImageHandler.png'),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 30),
-            _buildProfileOption(context, 'Edit Account'),
+            const SizedBox(height: 24),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                "Student Name",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black87,
+                ),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8),
+              child: Text(
+                "Student Email",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black87,
+                ),
+              ),
+            ),
+            const SizedBox(height: 24),
+            _buildProfileOption(context, 'Edit Account',
+                screen: const MainLayoutWidget(
+                  currentIndex: 3,
+                  child: EditAccountScreen(),
+                )),
             _buildProfileOption(context, 'Settings and Privacy',
-                screen: SettingsScreen()),
-            _buildProfileOption(context, 'Help'),
+                screen: const MainLayoutWidget(
+                  currentIndex: 3,
+                  child: SettingsScreen(),
+                )),
+            _buildProfileOption(context, 'Help',
+                screen: MainLayoutWidget(
+                  currentIndex: 3,
+                  child: HelpScreen(),
+                )),
+            _buildProfileOption(context, "Logout"),
+            const SizedBox(
+              height: 16,
+            ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 3,
-        selectedItemColor: Colors.lightBlue,
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'Courses',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.assignment),
-            label: 'Grades',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            label: 'Recommendation',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
-        onTap: (index) {
-          if (index == 0) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => CoursesScreen()),
-            );
-          } else if (index == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => GradeScreen()),
-            );
-          } else if (index == 2) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const RecommendationScreen()),
-            );
-          } else if (index == 3) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ProfileScreen()),
-            );
-          }
-        },
       ),
     );
   }
@@ -120,28 +100,17 @@ class ProfileScreen extends StatelessWidget {
                   );
                 }
               },
-              child: Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.black87,
+              child: SizedBox(
+                width: 328,
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: Colors.black87,
+                  ),
                 ),
-              ))
+              )),
         ],
-      ),
-    );
-  }
-}
-
-class SettingsScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings and Privacy'),
-      ),
-      body: const Center(
-        child: Text('Settings and Privacy Screen'),
       ),
     );
   }

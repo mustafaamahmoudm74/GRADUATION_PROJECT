@@ -1,5 +1,6 @@
-import 'package:ahramcanadianuni/modules/details_course_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../modules/details_course_screen.dart';
 
 class MainCardWidget extends StatelessWidget {
   final Widget? child;

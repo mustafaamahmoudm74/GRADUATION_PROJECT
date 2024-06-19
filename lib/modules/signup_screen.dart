@@ -1,7 +1,7 @@
-import 'package:ahramcanadianuni/modules/course_screen.dart';
-import 'package:ahramcanadianuni/modules/login_screen.dart';
-import 'package:ahramcanadianuni/widgets/custom_text_field_widget.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/custom_text_field_widget.dart';
+import 'login_screen.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});

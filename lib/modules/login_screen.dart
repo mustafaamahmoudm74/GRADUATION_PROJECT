@@ -1,10 +1,9 @@
-import 'dart:ui';
-import 'package:ahramcanadianuni/modules/course_screen.dart';
-import 'package:ahramcanadianuni/modules/signup_screen.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../widgets/custom_text_field_widget.dart';
-import 'package:flutter/material.dart';
+import '../widgets/main_layout_widget.dart';
+import 'course_screen.dart';
+import 'signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -62,6 +61,7 @@ class LoginScreen extends StatelessWidget {
                       backGroundColor: Colors.transparent,
                       borderColor: Colors.black,
                       label: "Your ID",
+                      prefixIcon: Icon(Icons.numbers),
                     ),
                     const SizedBox(
                       height: 24,
@@ -72,6 +72,8 @@ class LoginScreen extends StatelessWidget {
                       backGroundColor: Colors.transparent,
                       borderColor: Colors.black,
                       label: "Password",
+                      prefixIcon: Icon(Icons.lock),
+                      suffixIcon: Icon(Icons.remove_red_eye),
                       obscure: true,
                     ),
                     const SizedBox(
@@ -101,7 +103,10 @@ class LoginScreen extends StatelessWidget {
                         onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => CoursesScreen(),
+                            builder: (context) => MainLayoutWidget(
+                              currentIndex: 0,
+                              child: CoursesScreen(),
+                            ),
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
@@ -111,13 +116,21 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         child: const Text(
-                          "LogIn",
+                          "Login",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                           ),
                         ),
                       ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const Text(
+                      "Don't have an account?",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                     ),
                     TextButton(
                       onPressed: () => Navigator.push(
@@ -127,13 +140,15 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                       child: const Text(
-                        "Don't you have an account?",
+                        "Register Now",
                         style: TextStyle(
                             fontSize: 16,
                             decoration: TextDecoration.underline,
                             decorationColor: Colors.black54,
                             decorationThickness: 2),
                       ),
+
+                      // make row and edit here
                     )
                   ],
                 ),
