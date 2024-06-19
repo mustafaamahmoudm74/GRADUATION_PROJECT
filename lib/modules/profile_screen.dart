@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/main_layout_widget.dart';
-import 'edit_account_screen.dart';
 import 'help_screen.dart';
-import 'settings_screen.dart';
+import 'login_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -58,26 +57,13 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 24),
-            _buildProfileOption(context, 'Edit Account',
-                screen: const MainLayoutWidget(
-                  currentIndex: 3,
-                  child: EditAccountScreen(),
-                )),
-            _buildProfileOption(context, 'Settings and Privacy',
-                screen: const MainLayoutWidget(
-                  currentIndex: 3,
-                  child: SettingsScreen(),
-                )),
+            const SizedBox(height: 5),
             _buildProfileOption(context, 'Help',
                 screen: MainLayoutWidget(
                   currentIndex: 3,
                   child: HelpScreen(),
                 )),
             _buildProfileOption(context, "Logout"),
-            const SizedBox(
-              height: 16,
-            ),
           ],
         ),
       ),
@@ -93,7 +79,9 @@ class ProfileScreen extends StatelessWidget {
         children: [
           TextButton(
               onPressed: () {
-                if (screen != null) {
+                if (title == "Logout") {
+                  _logout(context);
+                } else if (screen != null) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => screen),
@@ -112,6 +100,13 @@ class ProfileScreen extends StatelessWidget {
               )),
         ],
       ),
+    );
+  }
+
+  void _logout(BuildContext context) {
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => const LoginScreen()),
+      (Route<dynamic> route) => false,
     );
   }
 }

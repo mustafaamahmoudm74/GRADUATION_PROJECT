@@ -6,15 +6,18 @@ class RecommendationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(60),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const Text("Recommendation System",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
           const SizedBox(height: 20),
           Center(
             child: Stack(
               alignment: Alignment.center,
               children: [
+                const SizedBox(height: 20),
                 CircleAvatar(
                   radius: 60,
                   backgroundColor: Colors.grey[300],
@@ -27,7 +30,7 @@ class RecommendationScreen extends StatelessWidget {
           const SizedBox(height: 80),
           const Text(
             " Your Recommendation is : ",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
           )
         ],
       ),

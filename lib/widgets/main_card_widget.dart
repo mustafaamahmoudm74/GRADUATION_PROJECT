@@ -20,7 +20,7 @@ class MainCardWidget extends StatelessWidget {
       width: 328,
       height: 80,
       decoration: const BoxDecoration(
-        color: Colors.white,
+        color: Color(0xCFCFD3CF),
         borderRadius: BorderRadius.all(
           Radius.circular(16),
         ),
