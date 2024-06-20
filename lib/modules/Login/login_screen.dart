@@ -1,12 +1,60 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/custom_text_field_widget.dart';
-import '../widgets/main_layout_widget.dart';
-import 'course_screen.dart';
-import 'signup_screen.dart';
+import '../../widgets/custom_check_box.dart';
+import '../../widgets/custom_text_field_widget.dart';
+import '../../widgets/main_layout_widget.dart';
+import '../course_screen.dart';
+import '../signup_screen.dart';
+import 'login_api_handler.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  bool checked = false;
+  bool stuChecked = false;
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  String _message = '';
+
+  void _login() async {
+    try {
+      final response = await LoginHandler()
+          .login(_usernameController.text, _passwordController.text);
+
+      // Handle successful login response here, e.g., save token, navigate to home screen
+      print('Login successful: $response');
+
+      // Save token or perform any necessary actions with the response
+      // For example, if response contains a token, save it using shared_preferences
+
+      setState(() {
+        _message = 'Logged in successfully';
+      });
+
+      // Navigate to the next screen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MainLayoutWidget(
+            currentIndex: 0,
+            child: CoursesScreen(),
+          ),
+        ),
+      );
+    } catch (e) {
+      // Handle login failure
+      print(
+          'Login failed with exception: $e'); // Print the exception to the console for debugging
+      setState(() {
+        _message = 'Login failed: $e';
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,43 +103,57 @@ class LoginScreen extends StatelessWidget {
                     const SizedBox(
                       height: 24,
                     ),
-                    const CustomTextFieldWidget(
+                    CustomTextFieldWidget(
                       width: 328,
                       height: 48,
+                      controller: _usernameController,
                       backGroundColor: Colors.transparent,
                       borderColor: Colors.black,
                       label: "Your ID",
-                      prefixIcon: Icon(Icons.numbers),
+                      prefixIcon: const Icon(Icons.numbers),
                     ),
                     const SizedBox(
                       height: 24,
                     ),
-                    const CustomTextFieldWidget(
+                    CustomTextFieldWidget(
                       width: 328,
                       height: 48,
+                      controller: _passwordController,
                       backGroundColor: Colors.transparent,
                       borderColor: Colors.black,
                       label: "Password",
-                      prefixIcon: Icon(Icons.lock),
-                      suffixIcon: Icon(Icons.remove_red_eye),
+                      prefixIcon: const Icon(Icons.lock),
+                      suffixIcon: const Icon(Icons.remove_red_eye),
                       obscure: true,
                     ),
                     const SizedBox(
                       height: 24,
                     ),
-                    Row(
-                      children: [
-                        const Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 48),
-                          child: InkWell(
-                            onTap: () {},
-                            child: const Text(
-                              "Forgot Password ?",
-                            ),
+                    SizedBox(
+                      width: 328,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CustomCheckBoxWidget(
+                            isChecked: stuChecked,
+                            onChange: (_) {
+                              stuChecked = _ ?? false;
+                              checked = false;
+                              setState(() {});
+                            },
+                            title: "Student",
                           ),
-                        ),
-                      ],
+                          CustomCheckBoxWidget(
+                            isChecked: checked,
+                            onChange: (_) {
+                              checked = _ ?? false;
+                              stuChecked = false;
+                              setState(() {});
+                            },
+                            title: "Admin",
+                          ),
+                        ],
+                      ),
                     ),
                     const SizedBox(
                       height: 24,
@@ -100,15 +162,7 @@ class LoginScreen extends StatelessWidget {
                       width: 328,
                       height: 48,
                       child: ElevatedButton(
-                        onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MainLayoutWidget(
-                              currentIndex: 0,
-                              child: CoursesScreen(),
-                            ),
-                          ),
-                        ),
+                        onPressed: () => _login,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue,
                           shape: RoundedRectangleBorder(

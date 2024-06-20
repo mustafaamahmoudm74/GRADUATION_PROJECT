@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/custom_check_box.dart';
 import '../widgets/custom_text_field_widget.dart';
-import 'login_screen.dart';
+import 'Login/login_screen.dart';
 
-class SignupScreen extends StatelessWidget {
+class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
+
+  @override
+  State<SignupScreen> createState() => _SignupScreenState();
+}
+
+class _SignupScreenState extends State<SignupScreen> {
+  bool checked = false;
+  bool stuChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -115,8 +124,35 @@ class SignupScreen extends StatelessWidget {
                     const SizedBox(
                       height: 24,
                     ),
-                    const SizedBox(
-                      height: 24,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomCheckBoxWidget(
+                          isChecked: stuChecked,
+                          onChange: (_) {
+                            stuChecked = _ ?? false;
+                            checked = false;
+                            setState(() {});
+                          },
+                          title: "Student",
+                        ),
+                        const SizedBox(
+                          width: 54,
+                        ),
+                        Row(
+                          children: [
+                            CustomCheckBoxWidget(
+                              isChecked: checked,
+                              onChange: (_) {
+                                checked = _ ?? false;
+                                stuChecked = false;
+                                setState(() {});
+                              },
+                              title: "Admin",
+                            ),
+                          ],
+                        )
+                      ],
                     ),
                     SizedBox(
                       width: 328,
