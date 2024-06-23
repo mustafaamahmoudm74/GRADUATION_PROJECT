@@ -1,0 +1,6 @@
+enum CustomViewPosition {
+  BEFORE_TITLE,
+  AFTER_TITLE,
+  BEFORE_MESSAGE,
+  AFTER_MESSAGE,
+}

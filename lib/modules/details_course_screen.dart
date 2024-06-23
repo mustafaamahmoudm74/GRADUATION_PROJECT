@@ -40,10 +40,10 @@ class DetailsCourseScreen extends StatelessWidget {
                   ),
                   const Spacer(),
                   SizedBox(
-                    width: 140,
-                    height: 160,
+                    width: 132,
+                    height: 132,
                     child: Image.asset(
-                      "assets/images/ImageHandler.png",
+                      "assets/images/Logo.png",
                       fit: BoxFit.cover,
                     ),
                   )

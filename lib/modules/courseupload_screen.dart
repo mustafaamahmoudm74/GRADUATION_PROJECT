@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../widgets/main_card_widget.dart';
 import 'details_course_screen.dart';
 
-class CoursesScreen extends StatelessWidget {
+class CourseUploadScreen extends StatelessWidget {
   final List<Map<String, String>> courses = [
     {
       'title': 'Fundamentals of programming 1',
@@ -31,8 +31,8 @@ class CoursesScreen extends StatelessWidget {
     },
   ];
 
-  CoursesScreen({super.key});
-
+  CourseUploadScreen({super.key});
+   
   @override
   Widget build(BuildContext context) {
     return SafeArea(

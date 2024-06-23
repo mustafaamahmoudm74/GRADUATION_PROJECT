@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../widgets/main_layout_widget.dart';
 import 'Login/login_screen.dart';
+import 'courseupload_screen.dart';
 import 'help_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  final bool isAdmin;
+
+  const ProfileScreen({super.key, required this.isAdmin});
 
   @override
   Widget build(BuildContext context) {
@@ -28,42 +31,49 @@ class ProfileScreen extends StatelessWidget {
                   CircleAvatar(
                     radius: 60,
                     backgroundColor: Colors.grey[300],
-                    backgroundImage:
-                        const AssetImage('assets/images/ImageHandler.png'),
+                    backgroundImage: const AssetImage('assets/images/Logo.png'),
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 24),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                "Student Name",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black87,
+            if (!isAdmin)
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  "Student Name",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black87,
+                  ),
                 ),
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(8),
-              child: Text(
-                "Student Email",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black87,
+            if (!isAdmin)
+              const Padding(
+                padding: EdgeInsets.all(8),
+                child: Text(
+                  "Student Email",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black87,
+                  ),
                 ),
               ),
-            ),
             const SizedBox(height: 5),
-            _buildProfileOption(context, 'Help',
+            if (!isAdmin)
+              _buildProfileOption(context, 'Help',
+                  screen: MainLayoutWidget(
+                    currentIndex: 3,
+                    child: HelpScreen(),
+                  )),
+            _buildProfileOption(context, "Logout"),
+            _buildProfileOption(context, 'Course Upload',
                 screen: MainLayoutWidget(
                   currentIndex: 3,
-                  child: HelpScreen(),
+                  child: CourseUploadScreen(),
                 )),
-            _buildProfileOption(context, "Logout"),
           ],
         ),
       ),

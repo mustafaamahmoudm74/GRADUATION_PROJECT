@@ -22,7 +22,7 @@ class NumericalRangeFormatter extends TextInputFormatter {
   }
 }
 
-class CustomTextFieldWidget extends StatelessWidget {
+class CustomTextFieldWidget extends StatefulWidget {
   static int get _companyDecimalNumber => 3;
 
   static List<TextInputFormatter> get integerNumberFormatter =>
@@ -34,7 +34,7 @@ class CustomTextFieldWidget extends StatelessWidget {
       ];
 
   final TextEditingController? controller;
-  final bool? obscure;
+  final bool obscure;
   final bool? readOnly;
   final bool enableInteractiveSelection;
   final String? hint;
@@ -106,8 +106,21 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.textAlign = TextAlign.start,
   });
 
+  @override
+  _CustomTextFieldWidgetState createState() => _CustomTextFieldWidgetState();
+}
+
+class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
+  late bool _isObscured;
+
+  @override
+  void initState() {
+    super.initState();
+    _isObscured = widget.obscure;
+  }
+
   InputBorder? getBorder(BuildContext context, {double? radius, Color? color}) {
-    if (disableBorder) return null;
+    if (widget.disableBorder) return null;
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(radius ?? 16),
       borderSide: BorderSide(
@@ -116,87 +129,89 @@ class CustomTextFieldWidget extends StatelessWidget {
     );
   }
 
+  void _toggleObscureText() {
+    setState(() {
+      _isObscured = !_isObscured;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width ?? 328,
-      height: height ?? 48,
+      width: widget.width ?? 328,
+      height: widget.height ?? 48,
       child: TextFormField(
-        onTap: onTap,
-        enableInteractiveSelection: enableInteractiveSelection,
-        textDirection: textDirection,
-        textAlign: textAlign ?? TextAlign.start,
-        autofocus: autoFocus,
-        mouseCursor: isClickable ? SystemMouseCursors.click : null,
-        textInputAction:
-            textInputAction ?? (onSave != null ? null : TextInputAction.next),
-        onFieldSubmitted: onSave,
-        focusNode: focusNode,
-        readOnly: readOnly ?? false,
+        onTap: widget.onTap,
+        enableInteractiveSelection: widget.enableInteractiveSelection,
+        textDirection: widget.textDirection,
+        textAlign: widget.textAlign ?? TextAlign.start,
+        autofocus: widget.autoFocus,
+        mouseCursor: widget.isClickable ? SystemMouseCursors.click : null,
+        textInputAction: widget.textInputAction ??
+            (widget.onSave != null ? null : TextInputAction.next),
+        onFieldSubmitted: widget.onSave,
+        focusNode: widget.focusNode,
+        readOnly: widget.readOnly ?? false,
         textAlignVertical: TextAlignVertical.center,
-        validator: validator,
-        enabled: enable,
-        inputFormatters: formatter,
-        obscureText: obscure ?? false,
-        controller: controller,
-        expands: expands ?? false,
+        validator: widget.validator,
+        enabled: widget.enable,
+        inputFormatters: widget.formatter,
+        obscureText: _isObscured,
+        controller: widget.controller,
+        expands: widget.expands ?? false,
         decoration: InputDecoration(
           errorStyle: const TextStyle(height: 0, fontSize: 0),
-          labelText: disableLabel ? null : label ?? hint,
+          labelText: widget.disableLabel ? null : widget.label ?? widget.hint,
           labelStyle: const TextStyle(fontSize: 14, color: Colors.grey),
-
-          enabledBorder:
-              getBorder(context, radius: borderRadiusValue, color: borderColor),
-          disabledBorder:
-              getBorder(context, radius: borderRadiusValue, color: borderColor),
+          enabledBorder: getBorder(context,
+              radius: widget.borderRadiusValue, color: widget.borderColor),
+          disabledBorder: getBorder(context,
+              radius: widget.borderRadiusValue, color: widget.borderColor),
           focusedBorder: getBorder(context,
-              radius: borderRadiusValue, color: Colors.black12),
+              radius: widget.borderRadiusValue, color: Colors.black12),
           border: getBorder(context,
-              radius: borderRadiusValue, color: Colors.black12),
-          isDense: isDense ?? false,
+              radius: widget.borderRadiusValue, color: Colors.black12),
+          isDense: widget.isDense ?? false,
           prefixIconConstraints: BoxConstraints(
-            minWidth: prefixIcon == null ? 0 : 35,
+            minWidth: widget.prefixIcon == null ? 0 : 35,
             minHeight: 48,
             maxHeight: 48,
           ),
           suffixIconConstraints: BoxConstraints(
-            minWidth: suffixIcon == null ? 0 : 45,
+            minWidth: widget.suffixIcon == null ? 0 : 45,
             minHeight: 48,
             maxHeight: 48,
           ),
           constraints: BoxConstraints(
-            minHeight: height ?? 48,
-            maxHeight: height ?? 48,
-            minWidth: width ?? 320,
-            maxWidth: width ?? 320,
+            minHeight: widget.height ?? 48,
+            maxHeight: widget.height ?? 48,
+            minWidth: widget.width ?? 320,
+            maxWidth: widget.width ?? 320,
           ),
-          // fillColor: enable
-          //     ? (backGroundColor ?? ThemeClass.of(context).background)
-          //     : cancelDisableBackground
-          //     ? (backGroundColor ?? ThemeClass.of(context).background)
-          //     : ThemeClass.of(context).dark.withOpacity(0.3),
-          // filled: true,
-          hintText: (label == null && !disableLabel) ? null : hint,
-          prefixIcon: prefixIcon ?? SizedBox(width: borderRadiusValue ?? 24),
-          suffixIcon: suffixIcon == null
-              ? SizedBox(width: borderRadiusValue ?? 24)
+          hintText: (widget.label == null && !widget.disableLabel)
+              ? null
+              : widget.hint,
+          prefixIcon: widget.prefixIcon ??
+              SizedBox(width: widget.borderRadiusValue ?? 24),
+          suffixIcon: widget.suffixIcon == null
+              ? SizedBox(width: widget.borderRadiusValue ?? 24)
               : SizedBox(
                   width: 30,
                   child: InkWell(
-                    onTap: onSuffixTap,
-                    borderRadius: BorderRadius.circular(height ?? 48),
+                    onTap: widget.onSuffixTap ?? _toggleObscureText,
+                    borderRadius: BorderRadius.circular(widget.height ?? 48),
                     hoverColor: Colors.transparent,
-                    child: suffixIcon,
+                    child: widget.suffixIcon,
                   ),
                 ),
-          hintStyle: hintStyle,
+          hintStyle: widget.hintStyle,
         ),
-        onChanged: onChange,
+        onChanged: widget.onChange,
         textCapitalization: TextCapitalization.words,
-        maxLines: maxLine ?? 1,
-        minLines: minLines ?? 1,
-        keyboardType: textInputType,
-        style: style?.copyWith(height: 1),
+        maxLines: widget.maxLine ?? 1,
+        minLines: widget.minLines ?? 1,
+        keyboardType: widget.textInputType,
+        style: widget.style?.copyWith(height: 1),
       ),
     );
   }

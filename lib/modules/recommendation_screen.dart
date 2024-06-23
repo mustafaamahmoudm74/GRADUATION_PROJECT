@@ -21,8 +21,7 @@ class RecommendationScreen extends StatelessWidget {
                 CircleAvatar(
                   radius: 60,
                   backgroundColor: Colors.grey[300],
-                  backgroundImage:
-                      const AssetImage('assets/images/ImageHandler.png'),
+                  backgroundImage: const AssetImage('assets/images/Logo.png'),
                 ),
               ],
             ),

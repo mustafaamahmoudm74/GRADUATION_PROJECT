@@ -73,7 +73,9 @@ class AppBottomNavigationBar extends StatelessWidget {
               MaterialPageRoute(
                   builder: (context) => const MainLayoutWidget(
                         currentIndex: 3,
-                        child: ProfileScreen(),
+                        child: ProfileScreen(
+                          isAdmin: false,
+                        ),
                       )),
             );
             break;

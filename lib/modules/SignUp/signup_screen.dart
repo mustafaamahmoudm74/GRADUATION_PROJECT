@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/custom_check_box.dart';
-import '../widgets/custom_text_field_widget.dart';
-import 'Login/login_screen.dart';
+import '../../widgets/custom_check_box.dart';
+import '../../widgets/custom_text_field_widget.dart';
+import '../Login/login_screen.dart';
+import 'signup_api_handler.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -14,6 +15,50 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   bool checked = false;
   bool stuChecked = false;
+
+  // Controllers for text fields
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _idController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
+  final SignupHandler _loginHandler = SignupHandler();
+
+  void _signUp() async {
+    try {
+      final response = await _loginHandler.signup(
+        _idController.text,
+        _firstNameController.text,
+        _lastNameController.text,
+        _emailController.text,
+        _passwordController.text,
+        _confirmPasswordController.text,
+      );
+
+      // Handle response
+      if (response['success']) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const LoginScreen(),
+          ),
+        );
+      } else {
+        // Handle failure
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response['message'])),
+        );
+      }
+    } catch (e) {
+      // Handle error
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Sign up failed: $e')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +107,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     const SizedBox(
                       height: 24,
                     ),
-                    const CustomTextFieldWidget(
+                    CustomTextFieldWidget(
+                      controller: _firstNameController,
                       width: 328,
                       height: 48,
                       backGroundColor: Colors.transparent,
@@ -72,7 +118,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     const SizedBox(
                       height: 24,
                     ),
-                    const CustomTextFieldWidget(
+                    CustomTextFieldWidget(
+                      controller: _lastNameController,
                       width: 328,
                       height: 48,
                       backGroundColor: Colors.transparent,
@@ -82,7 +129,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     const SizedBox(
                       height: 24,
                     ),
-                    const CustomTextFieldWidget(
+                    CustomTextFieldWidget(
+                      controller: _emailController,
                       width: 328,
                       height: 48,
                       backGroundColor: Colors.transparent,
@@ -92,7 +140,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     const SizedBox(
                       height: 24,
                     ),
-                    const CustomTextFieldWidget(
+                    CustomTextFieldWidget(
+                      controller: _idController,
                       width: 328,
                       height: 48,
                       backGroundColor: Colors.transparent,
@@ -102,7 +151,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     const SizedBox(
                       height: 24,
                     ),
-                    const CustomTextFieldWidget(
+                    CustomTextFieldWidget(
+                      controller: _passwordController,
                       width: 328,
                       height: 48,
                       backGroundColor: Colors.transparent,
@@ -113,7 +163,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     const SizedBox(
                       height: 24,
                     ),
-                    const CustomTextFieldWidget(
+                    CustomTextFieldWidget(
+                      controller: _confirmPasswordController,
                       width: 328,
                       height: 48,
                       backGroundColor: Colors.transparent,
@@ -158,12 +209,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       width: 328,
                       height: 48,
                       child: ElevatedButton(
-                        onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const LoginScreen(),
-                          ),
-                        ),
+                        onPressed: _signUp,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue,
                           shape: RoundedRectangleBorder(

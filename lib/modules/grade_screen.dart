@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/dialogs.dart';
 import '../widgets/main_card_widget.dart';
 
 class GradeScreen extends StatelessWidget {
   final List<Map<String, String>> grades = [
     {
-      'title': 'Introdution to Cs',
+      'title': 'Introduction to Cs',
     },
     {
       'title': 'Fundamentals of programming |',
@@ -93,7 +94,7 @@ class GradeScreen extends StatelessWidget {
                     width: 80,
                     height: 80,
                     child: Image.asset(
-                      'assets/images/ImageHandler.png',
+                      'assets/images/Logo.png',
                     ),
                   ),
                 ],
@@ -105,7 +106,7 @@ class GradeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Choice your course',
+                    'Choose your course',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
@@ -122,6 +123,21 @@ class GradeScreen extends StatelessWidget {
                       return MainCardWidget(
                         title: (course['title'] ?? ""),
                         isGradesScreen: true,
+                        onPressed: () {
+                          Dialogs.materialDialog(
+                            context: context,
+                            title: course['title'] ?? "Course Details",
+                            msg: "Your Grade is:",
+                            actionsBuilder: (context) => [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('Close'),
+                              ),
+                            ],
+                          );
+                        },
                       );
                     },
                   ),

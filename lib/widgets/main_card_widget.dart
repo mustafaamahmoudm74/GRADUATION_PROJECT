@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-import '../modules/details_course_screen.dart';
-
 class MainCardWidget extends StatelessWidget {
   final Widget? child;
   final String? title;
   final bool isGradesScreen;
+  final VoidCallback? onPressed;
 
   const MainCardWidget({
     super.key,
     this.child,
     this.title,
     this.isGradesScreen = false,
+    this.onPressed,
   });
 
   @override
@@ -42,16 +42,7 @@ class MainCardWidget extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DetailsCourseScreen(
-                        courseName: title ?? "",
-                        aboutCourse: isGradesScreen ? null : title ?? "",
-                        isGradesScreen: isGradesScreen,
-                      ),
-                    ),
-                  ),
+                  onPressed: onPressed,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.lightBlue,
                     shape: RoundedRectangleBorder(
