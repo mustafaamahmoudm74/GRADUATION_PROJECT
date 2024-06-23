@@ -1,4 +1,4 @@
-# ahramcanadianuni
+# ACU APP
 
 A new Flutter project.
 
