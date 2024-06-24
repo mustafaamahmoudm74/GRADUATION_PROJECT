@@ -78,13 +78,46 @@ class DetailsCourseScreen extends StatelessWidget {
                             height: 10,
                           ),
                           Text(
-                            "This course covers key concepts and practical skills, focusing on applications and core theories.",
+                            "  ssss ",
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.black87,
                               fontWeight: FontWeight.w400,
                             ),
-                          )
+                          ),
+                          SizedBox(
+                            height: 64,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(12.0),
+                            child: Text(
+                              "Lec 1",
+                              style: TextStyle(
+                                  fontSize: 32, fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 34,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(12.0),
+                            child: Text(
+                              "Lec 2",
+                              style: TextStyle(
+                                  fontSize: 32, fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 34,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(12.0),
+                            child: Text(
+                              "Lec 3",
+                              style: TextStyle(
+                                  fontSize: 32, fontWeight: FontWeight.w500),
+                            ),
+                          ),
                         ],
                       ),
                     ),

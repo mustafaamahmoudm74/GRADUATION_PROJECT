@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../utilities/share_pref.dart';
 import '../../widgets/custom_text_field_widget.dart';
 import '../../widgets/main_layout_widget.dart';
+import '../Courses/course_screen.dart';
 import '../SignUp/signup_screen.dart';
-import '../course_screen.dart';
 import 'login_api_handler.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -25,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
           .login(_usernameController.text, _passwordController.text);
 
       print('Login successful: $response');
-
+      await UserPreferences.saveUserId(_usernameController.text);
       setState(() {
         _message = 'Logged in successfully';
       });

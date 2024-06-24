@@ -13,8 +13,8 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  bool checked = false;
-  bool stuChecked = false;
+  bool adminChecked = false;
+  bool studentChecked = false;
 
   // Controllers for text fields
   final TextEditingController _firstNameController = TextEditingController();
@@ -30,12 +30,13 @@ class _SignupScreenState extends State<SignupScreen> {
   void _signUp() async {
     try {
       final response = await _loginHandler.signup(
-        _idController.text,
-        _firstNameController.text,
-        _lastNameController.text,
-        _emailController.text,
-        _passwordController.text,
-        _confirmPasswordController.text,
+        id: int.tryParse(_idController.text) ?? 0,
+        firstName: _firstNameController.text,
+        lastName: _lastNameController.text,
+        email: _emailController.text,
+        password: _passwordController.text,
+        confirmPassword: _confirmPasswordController.text,
+        roleId: adminChecked ? 2 : 1,
       );
 
       // Handle response
@@ -179,10 +180,10 @@ class _SignupScreenState extends State<SignupScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CustomCheckBoxWidget(
-                          isChecked: stuChecked,
+                          isChecked: studentChecked,
                           onChange: (_) {
-                            stuChecked = _ ?? false;
-                            checked = false;
+                            studentChecked = _ ?? false;
+                            adminChecked = false;
                             setState(() {});
                           },
                           title: "Student",
@@ -193,10 +194,10 @@ class _SignupScreenState extends State<SignupScreen> {
                         Row(
                           children: [
                             CustomCheckBoxWidget(
-                              isChecked: checked,
+                              isChecked: adminChecked,
                               onChange: (_) {
-                                checked = _ ?? false;
-                                stuChecked = false;
+                                adminChecked = _ ?? false;
+                                studentChecked = false;
                                 setState(() {});
                               },
                               title: "Admin",

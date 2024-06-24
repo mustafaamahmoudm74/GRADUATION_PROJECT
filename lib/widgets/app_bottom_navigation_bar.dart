@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../modules/course_screen.dart';
+import '../modules/Courses/course_screen.dart';
+import '../modules/Recommendation/recommendation_screen.dart';
 import '../modules/grade_screen.dart';
 import '../modules/profile_screen.dart';
-import '../modules/recommendation_screen.dart';
 import 'main_layout_widget.dart';
 
 class AppBottomNavigationBar extends StatelessWidget {

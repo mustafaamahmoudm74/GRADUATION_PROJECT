@@ -41,7 +41,7 @@ class ProfileScreen extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
-                  "Student Name",
+                  "Welcome my student",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
@@ -49,19 +49,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),
-            if (!isAdmin)
-              const Padding(
-                padding: EdgeInsets.all(8),
-                child: Text(
-                  "Student Email",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black87,
-                  ),
-                ),
-              ),
-            const SizedBox(height: 5),
+            if (!isAdmin) const SizedBox(height: 5),
             if (!isAdmin)
               _buildProfileOption(context, 'Help',
                   screen: MainLayoutWidget(

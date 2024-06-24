@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../utilities/api_endpoints.dart';
 
@@ -21,15 +22,17 @@ class LoginHandler {
               const Duration(seconds: 10)); // Increase timeout to 10 seconds
 
       if (response.statusCode == 200) {
-        // If the server returns a 200 OK response, parse the JSON
-        return json.decode(response.body);
+        final responseBody = json.decode(response.body);
+        ApiEndpoints.token = responseBody['jwt_token'];
+        ApiEndpoints.headers['Authorization'] = 'Bearer ${ApiEndpoints.token}';
+        print(responseBody['jwt_token']);
+        print(ApiEndpoints.token);
+        return responseBody;
       } else {
-        // If the server did not return a 200 OK response, throw an exception.
         throw Exception(
             'Failed to login with status code: ${response.statusCode}');
       }
     } catch (e) {
-      // Handle any exceptions thrown during the request
       debugPrint('Exception during login: $e');
       throw Exception('Failed to login: $e');
     }

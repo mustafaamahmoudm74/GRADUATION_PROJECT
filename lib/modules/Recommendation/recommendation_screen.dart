@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../utilities/share_pref.dart';
+import 'recommendation_api_handler.dart';
+
 class RecommendationScreen extends StatelessWidget {
   const RecommendationScreen({super.key});
 
@@ -27,9 +30,15 @@ class RecommendationScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 80),
-          const Text(
-            " Your Recommendation is : ",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+          TextButton(
+            onPressed: () async {
+              String? userId = await UserPreferences.getUserId();
+              if (userId != null) {
+                await RecommendationHandler.recommendation(userId);
+              }
+              print("<<<<<<<<<object>>>>>>>>>$userId");
+            },
+            child: const Text("GET MY RECOMMENDATION"),
           )
         ],
       ),

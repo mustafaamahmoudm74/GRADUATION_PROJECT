@@ -6,25 +6,28 @@ import 'package:http/http.dart' as http;
 import '../../utilities/api_endpoints.dart';
 
 class SignupHandler {
-  Future<Map<String, dynamic>> signup(
-      String id,
-      String firstName,
-      String lastName,
-      String email,
-      String password,
-      String confirmPassword) async {
+  Future<Map<String, dynamic>> signup({
+    required int id,
+    required String firstName,
+    required String lastName,
+    required String email,
+    required String password,
+    required String confirmPassword,
+    required int roleId,
+  }) async {
     try {
       final response = await http
           .post(
             Uri.parse(ApiEndpoints.signup),
             headers: ApiEndpoints.headers,
-            body: jsonEncode(<String, String>{
+            body: jsonEncode(<String, dynamic>{
               'first_name': firstName,
               'last_name': lastName,
               'email': email,
               'student_id': id,
               'password': password,
               'confirm_password': confirmPassword,
+              'role_id': roleId
             }),
           )
           .timeout(const Duration(seconds: 10));
@@ -32,12 +35,11 @@ class SignupHandler {
       if (response.statusCode == 200) {
         return json.decode(response.body);
       } else {
-        throw Exception(
-            'Failed to SignUp with status code: ${response.statusCode}');
+        throw Exception(' ${response.body}');
       }
     } catch (e) {
-      debugPrint('Exception during SignUp: $e');
-      throw Exception('Failed to SignUp: $e');
+      debugPrint('$e');
+      throw Exception('$e');
     }
   }
 }
