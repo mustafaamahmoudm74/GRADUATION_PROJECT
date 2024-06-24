@@ -62,67 +62,38 @@ class DetailsCourseScreen extends StatelessWidget {
               ),
               child: isGradesScreen
                   ? null
-                  : const Padding(
-                      padding: EdgeInsets.all(14.0),
+                  : Padding(
+                      padding: const EdgeInsets.all(14.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             "About this course",
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
-                          Text(
-                            "  ssss ",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black87,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
                           SizedBox(
-                            height: 64,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(12.0),
-                            child: Text(
-                              "Lec 1",
-                              style: TextStyle(
-                                  fontSize: 32, fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 34,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(12.0),
-                            child: Text(
-                              "Lec 2",
-                              style: TextStyle(
-                                  fontSize: 32, fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 34,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(12.0),
-                            child: Text(
-                              "Lec 3",
-                              style: TextStyle(
-                                  fontSize: 32, fontWeight: FontWeight.w500),
+                            height: 556,
+                            child: SingleChildScrollView(
+                              child: Text(
+                                aboutCourse ?? "",
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black87,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
                             ),
                           ),
                         ],
                       ),
                     ),
             ),
-            const SizedBox(height: 20),
           ],
         ),
       )),
