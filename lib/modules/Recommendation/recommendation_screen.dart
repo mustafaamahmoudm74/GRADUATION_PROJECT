@@ -134,15 +134,25 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
             const SizedBox(
               height: 16,
             ),
-            ElevatedButton(
-              onPressed: _saveText,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
+            SizedBox(
+              width: 316,
+              height: 54,
+              child: ElevatedButton(
+                onPressed: _saveText,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                child: const Text(
+                  'Get Recommendation',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white),
                 ),
               ),
-              child: const Text('Get Recommendation'),
             ),
             if (storedText != null)
               Padding(

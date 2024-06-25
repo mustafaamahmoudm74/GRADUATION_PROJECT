@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../modules/Courses/course_screen.dart';
+import '../modules/Grades/grade_screen.dart';
 import '../modules/Recommendation/recommendation_screen.dart';
-import '../modules/grade_screen.dart';
 import '../modules/profile_screen.dart';
 import 'main_layout_widget.dart';
 
@@ -41,7 +41,7 @@ class AppBottomNavigationBar extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => MainLayoutWidget(
+                  builder: (context) => const MainLayoutWidget(
                         currentIndex: 0,
                         child: CoursesScreen(),
                       )),
@@ -51,9 +51,9 @@ class AppBottomNavigationBar extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => MainLayoutWidget(
+                  builder: (context) => const MainLayoutWidget(
                         currentIndex: 1,
-                        child: GradeScreen(),
+                        child: GradesScreen(),
                       )),
             );
             break;
@@ -61,7 +61,7 @@ class AppBottomNavigationBar extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => MainLayoutWidget(
+                  builder: (context) => const MainLayoutWidget(
                         currentIndex: 2,
                         child: RecommendationScreen(),
                       )),

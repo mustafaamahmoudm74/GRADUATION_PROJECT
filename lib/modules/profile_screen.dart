@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../widgets/main_layout_widget.dart';
 import 'Login/login_screen.dart';
-import 'courseupload_screen.dart';
 import 'help_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -57,11 +56,11 @@ class ProfileScreen extends StatelessWidget {
                     child: HelpScreen(),
                   )),
             _buildProfileOption(context, "Logout"),
-            _buildProfileOption(context, 'Course Upload',
-                screen: MainLayoutWidget(
-                  currentIndex: 3,
-                  child: CourseUploadScreen(),
-                )),
+            // _buildProfileOption(context, 'Course Upload',
+            //     screen: MainLayoutWidget(
+            //       currentIndex: 3,
+            //       child: CourseUploadScreen(),
+            //     )),
           ],
         ),
       ),

@@ -29,6 +29,7 @@ class ApiEndpoints {
   static String course = '${baseUrl}courses';
   static String recommendation =
       'https://id-department-3.onrender.com/department';
+  static String grades = '${baseUrl}courses/student';
 
   static Future<Map<String, String>> getHeadersWithUserId(String userId) async {
     var headers = await getHeaders();
