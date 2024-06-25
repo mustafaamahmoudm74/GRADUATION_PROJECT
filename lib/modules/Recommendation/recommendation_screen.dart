@@ -136,6 +136,12 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
             ),
             ElevatedButton(
               onPressed: _saveText,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
               child: const Text('Get Recommendation'),
             ),
             if (storedText != null)

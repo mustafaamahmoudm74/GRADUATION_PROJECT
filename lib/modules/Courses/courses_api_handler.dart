@@ -65,7 +65,7 @@ class CourseHandler {
         Uri.parse(ApiEndpoints.course); // Replace with the actual API endpoint
     final headers = {
       'Authorization':
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE2IiwibmJmIjoxNzE5MTc1MTY0LCJleHAiOjE3MTkyNjE1NjQsImlhdCI6MTcxOTE3NTE2NH0.lzmDQ609P-6smqLz5d4d4awE74MGS1ISx8qFLhs4YOo',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIzIiwibmJmIjoxNzE5MzQwMjY0LCJleHAiOjE3MTk0MjY2NjQsImlhdCI6MTcxOTM0MDI2NH0.mp_QhhwzL0PPwVFCuOBQmaV9nABX9Kvgybrn-InvaI4',
       'x-api-key': 'XYSVDVSVSDCX2VD5533VPPTIOIOPQWDEMNI8876110Z',
       'Content-Type': 'application/json',
     };

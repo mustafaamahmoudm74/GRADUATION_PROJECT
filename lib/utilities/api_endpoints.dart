@@ -5,7 +5,8 @@ class ApiEndpoints {
 
   static Future<String?> _getToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('user_token');
+    return prefs.getString(
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIzIiwibmJmIjoxNzE5MzQwMjY0LCJleHAiOjE3MTk0MjY2NjQsImlhdCI6MTcxOTM0MDI2NH0.mp_QhhwzL0PPwVFCuOBQmaV9nABX9Kvgybrn-InvaI4');
   }
 
   static Future<Map<String, String>> getHeaders(
