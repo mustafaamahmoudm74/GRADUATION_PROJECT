@@ -9,24 +9,37 @@ import '../../utilities/api_endpoints.dart';
 class LoginHandler {
   Future<Map<String, dynamic>> login(String username, String password) async {
     try {
+      final headers =
+          await ApiEndpoints.getHeaders(includeAuthorization: false);
+      final body = jsonEncode(<String, String>{
+        'userName': username,
+        'password': password,
+      });
+
+      print('Request URL: ${ApiEndpoints.login}');
+      print('Request Headers: $headers');
+      print('Request Body: $body');
+
       final response = await http
           .post(
             Uri.parse(ApiEndpoints.login),
-            headers: ApiEndpoints.headers,
-            body: jsonEncode(<String, String>{
-              'userName': username,
-              'password': password,
-            }),
+            headers: headers,
+            body: body,
           )
           .timeout(
-              const Duration(seconds: 10)); // Increase timeout to 10 seconds
+              const Duration(seconds: 20)); // Increase timeout to 20 seconds
+
+      print('Response Status Code: ${response.statusCode}');
+      print('Response Body: ${response.body}');
 
       if (response.statusCode == 200) {
         final responseBody = json.decode(response.body);
-        ApiEndpoints.token = responseBody['jwt_token'];
-        ApiEndpoints.headers['Authorization'] = 'Bearer ${ApiEndpoints.token}';
-        print(responseBody['jwt_token']);
-        print(ApiEndpoints.token);
+        String token = responseBody['jwt_token'];
+        String studentId = responseBody['student_id'];
+        await _saveToken(token);
+        await _saveStudentId(studentId);
+        print('Token: $token');
+        print('Student ID: $studentId');
         return responseBody;
       } else {
         throw Exception(
@@ -36,5 +49,15 @@ class LoginHandler {
       debugPrint('Exception during login: $e');
       throw Exception('Failed to login: $e');
     }
+  }
+
+  Future<void> _saveToken(String token) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('user_token', token);
+  }
+
+  Future<void> _saveStudentId(String studentId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('student_id', studentId);
   }
 }

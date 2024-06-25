@@ -16,10 +16,11 @@ class SignupHandler {
     required int roleId,
   }) async {
     try {
+      final headers = await ApiEndpoints.getHeaders();
       final response = await http
           .post(
             Uri.parse(ApiEndpoints.signup),
-            headers: ApiEndpoints.headers,
+            headers: headers,
             body: jsonEncode(<String, dynamic>{
               'first_name': firstName,
               'last_name': lastName,

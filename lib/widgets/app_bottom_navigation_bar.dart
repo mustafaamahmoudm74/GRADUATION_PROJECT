@@ -61,7 +61,7 @@ class AppBottomNavigationBar extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const MainLayoutWidget(
+                  builder: (context) => MainLayoutWidget(
                         currentIndex: 2,
                         child: RecommendationScreen(),
                       )),
