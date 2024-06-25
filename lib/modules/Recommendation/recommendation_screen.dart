@@ -1,3 +1,4 @@
+//
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,54 +40,31 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
       storedText = text;
       futureRecommendation = _loadRecommendation(text);
     });
+
+    _showDialog(await _loadRecommendation(text));
   }
 
   Future<Map<String, dynamic>> _loadRecommendation(String data) async {
     return await RecommendationHandler.getRecommendation(data);
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Recommendations')),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              controller: _textController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Enter some data',
-              ),
-            ),
+  void _showDialog(Map<String, dynamic> recommendations) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text(
+            'Your Recommendation',
+            style: TextStyle(
+                fontSize: 24, fontWeight: FontWeight.w500, color: Colors.black),
           ),
-          ElevatedButton(
-            onPressed: _saveText,
-            child: const Text('Save Data'),
-          ),
-          if (storedText != null)
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text('Stored Data: $storedText'),
-            ),
-          Expanded(
-            child: FutureBuilder<Map<String, dynamic>>(
-              future: futureRecommendation,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return Center(child: Text('No recommendations available'));
-                } else {
-                  final recommendations = snapshot.data!;
-                  return ListView.builder(
-                    itemCount: recommendations.length,
-                    itemBuilder: (context, index) {
-                      final recommendation =
-                          recommendations.values.elementAt(index);
+          content: recommendations.isEmpty
+              ? const Text('No recommendations available')
+              : SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: recommendations.entries.map((entry) {
+                      final recommendation = entry.value;
                       if (recommendation is Map) {
                         return ListTile(
                           title: Text(recommendation['title'] ?? 'No title'),
@@ -95,17 +73,78 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                         );
                       } else {
                         return ListTile(
-                          title: Text('Invalid data format'),
                           subtitle: Text(recommendation.toString()),
                         );
                       }
-                    },
-                  );
-                }
-              },
+                    }).toList(),
+                  ),
+                ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Close'),
             ),
-          ),
-        ],
+          ],
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(height: 64),
+            const Text("Recommendation System",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
+            const SizedBox(
+              height: 24,
+            ),
+            Center(
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  CircleAvatar(
+                    radius: 60,
+                    backgroundColor: Colors.grey[300],
+                    backgroundImage: const AssetImage('assets/images/Logo.png'),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 46,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: TextField(
+                controller: _textController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(18.0)),
+                  ),
+                  labelText: 'Enter ID',
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            ElevatedButton(
+              onPressed: _saveText,
+              child: const Text('Get Recommendation'),
+            ),
+            if (storedText != null)
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text('ID Entered: $storedText'),
+              ),
+          ],
+        ),
       ),
     );
   }
