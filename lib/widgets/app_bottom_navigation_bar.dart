@@ -51,9 +51,9 @@ class AppBottomNavigationBar extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const MainLayoutWidget(
+                  builder: (context) => MainLayoutWidget(
                         currentIndex: 1,
-                        child: GradesScreen(),
+                        child: GradeScreen(),
                       )),
             );
             break;

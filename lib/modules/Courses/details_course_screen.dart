@@ -32,9 +32,9 @@ class DetailsCourseScreen extends StatelessWidget {
                       maxLines: 3,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
-                        color: Colors.black54,
+                        color: Colors.black,
                         fontWeight: FontWeight.w600,
-                        fontSize: 28,
+                        fontSize: 29,
                       ),
                     ),
                   ),
@@ -70,22 +70,26 @@ class DetailsCourseScreen extends StatelessWidget {
                           const Text(
                             "About this course",
                             style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
+                              fontSize: 27,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                           const SizedBox(
-                            height: 10,
+                            height: 24,
                           ),
                           SizedBox(
                             height: 556,
                             child: SingleChildScrollView(
-                              child: Text(
-                                aboutCourse ?? "",
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black87,
-                                  fontWeight: FontWeight.w400,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  textAlign: TextAlign.left,
+                                  aboutCourse ?? "",
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black87,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
                             ),
